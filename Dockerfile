@@ -11,7 +11,7 @@ FROM xpatterns/java:7u79
 # ---- Expose ports ---------------------------------------
 
 # Zookeeper
-EXPOSE 5181
+EXPOSE 2181
 
 # Follow the leader communication
 EXPOSE 2888
