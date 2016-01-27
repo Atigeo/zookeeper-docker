@@ -7,18 +7,10 @@ init()
 	service zookeeper-server init
 }
 
-
-# Initalize the container
-init_container()
-{
-	init
-	start_container
-}
-
 # Start zookeeper and tail logs to keep PID 1 going.
 start_container() 
 {
-	chown zookeeper:zookeeper /var/lib/zookeeper/
+        init
 	start_zookeeper
 	sleep 5
 	tail -f /var/log/zookeeper/*.out
@@ -40,23 +32,18 @@ stop_zookeeper()
 
 
 # Startup the container
-if [ -z $1 ] || [ "$1" == "run" ]; then
+if [ -z $1 ]; then
 	start_container
-fi
-
-# Initalize the container
-if [ "$1" == "init" ]; then 
-	init_container
 fi
 
 # Start
 if [ "$1" == "start" ]; then 
-	start_zookeeper
+        start_zookeeper
 fi
 
 # Stop
-if [ "$1" == "stop" ]; then 
-	stop_zookeeper
+if [ "$1" == "stop" ]; then
+        stop_zookeeper
 fi
 
 # Restart
